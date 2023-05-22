@@ -34,14 +34,15 @@ function BookingForm() {
         const postData = {
           name,
           roomType,
-          checkInDate,
-          checkOutDate,
+          checkInDate: checkInDate.toString(),
+          checkOutDate: checkOutDate.toString(),
         };
 
-        const { data } = await axios.post(
-          "http://localhost:3000/bookings",
-          postData
-        );
+        const {data} = await axios.post('http://localhost:3000/bookings',postData);
+
+        if(data){
+          alert('Room is added to Queue');
+        }
       } catch (error) {
         console.log(error.response.data.msg);
       }

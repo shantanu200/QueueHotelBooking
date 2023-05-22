@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import mongoose from "mongoose";
 
 // Connect to MongoDB
@@ -13,8 +14,8 @@ const bookingSchema = new mongoose.Schema(
   {
     name: String,
     roomType: String,
-    checkInDate: Date,
-    checkOutDate: Date,
+    checkInDate: String,
+    checkOutDate: String,
   },
   { timestamps: true }
 );
@@ -25,6 +26,8 @@ const Booking = mongoose.model("Booking", bookingSchema);
 // Create an instance of express
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded());
+app.use(cors());
 
 // Create a queue for hotel bookings
 const bookingQueue = [];
